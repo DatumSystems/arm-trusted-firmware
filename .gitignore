@@ -34,3 +34,6 @@ GPATH
 GRTAGS
 GSYMS
 GTAGS
+
+# VSCode files
+.vscode*
