@@ -509,7 +509,7 @@ void bl2_el3_plat_arch_setup(void)
 		NOTICE("Model: %s\n", board_model);
 	}
 
-	NOTICE("FSBL: v2.1.1\n");
+	NOTICE("FSBL: v2.1.2\n");
 
 	stm32mp_print_boardinfo();
 
