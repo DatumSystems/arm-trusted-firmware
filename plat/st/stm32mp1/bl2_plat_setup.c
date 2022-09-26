@@ -524,7 +524,7 @@ void bl2_el3_plat_arch_setup(void)
 	 * x   = Datum System version
 	 */
 
-	NOTICE("FSBL: v2.2.2.1-1\n");
+	NOTICE("FSBL: v2.2.2.3-1\n");
 
 	stm32mp_print_boardinfo();
 
