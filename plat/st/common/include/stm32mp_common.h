@@ -23,6 +23,7 @@ bool stm32mp_is_closed_device(void);
 bool stm32mp_is_auth_supported(void);
 
 const char *stm32mp_get_cpu_supply_name(void);
+const char *stm32mp_get_usb_phy_supply_name(void);
 
 /* Return the base address of the DDR controller */
 uintptr_t stm32mp_ddrctrl_base(void);
@@ -84,6 +85,7 @@ uintptr_t get_uart_address(uint32_t instance_nb);
 uintptr_t stm32_get_gpio_bank_base(unsigned int bank);
 unsigned long stm32_get_gpio_bank_clock(unsigned int bank);
 uint32_t stm32_get_gpio_bank_offset(unsigned int bank);
+bool stm32_gpio_is_secure_at_reset(unsigned int bank);
 
 /* Print CPU information */
 void stm32mp_print_cpuinfo(void);

@@ -334,6 +334,8 @@ enum ddr_type {
 #define DEBUG_UART_TX_CLKSRC		RCC_UART24CKSELR_HSI
 #define DEBUG_UART_TX_EN_REG		RCC_MP_APB1ENSETR
 #define DEBUG_UART_TX_EN		RCC_MP_APB1ENSETR_UART4EN
+#define DEBUG_UART_RST_REG		RCC_APB1RSTSETR
+#define DEBUG_UART_RST_BIT		RCC_APB1RSTSETR_UART4RST
 
 /*******************************************************************************
  * STM32MP1 ETZPC
@@ -582,6 +584,7 @@ static inline uint32_t tamp_bkpr(uint32_t idx)
 #define DT_OPP_COMPAT			"operating-points-v2"
 #define DT_PWR_COMPAT			"st,stm32mp1,pwr-reg"
 #define DT_RCC_CLK_COMPAT		"st,stm32mp1-rcc"
+#define DT_USBPHYC_COMPAT		"st,stm32mp1-usbphyc"
 
 #define DT_PLL1_NODE_NAME		"st,pll@0"
 
