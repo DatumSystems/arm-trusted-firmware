@@ -44,3 +44,6 @@ tags
 
 # Node.js
 node_modules/
+
+# VSCode files
+.vscode*
