@@ -331,6 +331,14 @@ void bl2_el3_plat_arch_setup(void)
 		NOTICE("Model: %s\n", board_model);
 	}
 
+	/* 
+	* Versioning for Datum: a.b.c.d-x
+	* a.b = arm-trusted-firmware (upstream) version
+	* c.d = STMicro sub-version
+	* x   = Datum System version
+	*/
+	NOTICE("FSBL: v2.6.1.0-1\n");
+	
 	stm32mp_print_boardinfo();
 
 	if (boot_context->auth_status != BOOT_API_CTX_AUTH_NO) {
