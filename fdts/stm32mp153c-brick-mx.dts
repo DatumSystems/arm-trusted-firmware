@@ -50,7 +50,7 @@
 
 	chosen{
 		stdout-path = "serial0:115200n8";
-	};	
+	};
 	/* USER CODE END root */
 
 	clocks {
@@ -159,6 +159,13 @@
 	/* USER CODE END bsec */
 };
 
+&cryp1{
+	status = "okay";
+
+	/* USER CODE BEGIN cryp1 */
+	/* USER CODE END cryp1 */
+};
+
 &etzpc{
 	status = "okay";
 	st,decprot = <
@@ -181,7 +188,8 @@
 	DECPROT(STM32MP1_ETZPC_DDRCTRL_ID, DECPROT_NS_R_S_W, DECPROT_LOCK)
 	DECPROT(STM32MP1_ETZPC_DDRPHYC_ID, DECPROT_NS_R_S_W, DECPROT_LOCK)
 	/*"Secured" peripherals*/
-	DECPROT(STM32MP1_ETZPC_STGENC_ID, DECPROT_S_RW, DECPROT_UNLOCK)
+	DECPROT(STM32MP1_ETZPC_IWDG1_ID, DECPROT_S_RW, DECPROT_LOCK)
+	DECPROT(STM32MP1_ETZPC_STGENC_ID, DECPROT_S_RW, DECPROT_LOCK)
 	/*"Mcu Isolation" peripherals*/
 	DECPROT(STM32MP1_ETZPC_DMA2_ID, DECPROT_MCU_ISOLATION, DECPROT_UNLOCK)
 	DECPROT(STM32MP1_ETZPC_FMC_ID, DECPROT_MCU_ISOLATION, DECPROT_UNLOCK)
@@ -197,11 +205,19 @@
 		/*STM32CubeMX generates a basic and standard configuration for ETZPC.
 		Additional device configurations can be added here if needed.
 		"etzpc" node could be also overloaded in "addons" User-Section.*/
+	DECPROT(STM32MP1_ETZPC_BKPSRAM_ID, DECPROT_S_RW, DECPROT_LOCK)
 	/* USER CODE END etzpc_decprot */
 	>;
 
 	/* USER CODE BEGIN etzpc */
 	/* USER CODE END etzpc */
+};
+
+&hash1{
+	status = "okay";
+
+	/* USER CODE BEGIN hash1 */
+	/* USER CODE END hash1 */
 };
 
 &i2c4{
@@ -347,8 +363,6 @@
 
 			vtt_ddr: ldo3 {
 				regulator-name = "vtt_ddr";
-				regulator-min-microvolt = <500000>;
-				regulator-max-microvolt = <750000>;
 				regulator-always-on;
 				regulator-over-current-protection;
 				lp-stop {
@@ -433,10 +447,20 @@
 	/* USER CODE END i2c4 */
 };
 
+// &iwdg1{
+// 	status = "okay";
+
+// 	/* USER CODE BEGIN iwdg1 */
+// 	/* USER CODE END iwdg1 */
+// };
+
 &iwdg2{
 	status = "okay";
 
 	/* USER CODE BEGIN iwdg2 */
+	timeout-sec = <32>;
+	secure-timeout-sec = <5>;
+	status = "okay";
 	/* USER CODE END iwdg2 */
 };
 
@@ -444,9 +468,6 @@
 	status = "okay";
 
 	/* USER CODE BEGIN rcc */
-	st,csi-cal;
-	st,hsi-cal;
-	st,cal-sec = <60>;
 	/* USER CODE END rcc */
 
 	st,clksrc = <
@@ -500,7 +521,7 @@
 		CLK_SAI2_DISABLED
 		CLK_SAI3_DISABLED
 		CLK_SAI4_DISABLED
-		CLK_RNG1_LSI
+		CLK_RNG1_CSI
 		CLK_LPTIM1_DISABLED
 		CLK_LPTIM23_DISABLED
 		CLK_LPTIM45_DISABLED
@@ -610,27 +631,29 @@
 	cpu-supply = <&vddcore>;
 };
 
-&nvmem_layout {
-	nvmem-cells = <&cfg0_otp>,
-		      <&part_number_otp>,
-		      <&monotonic_otp>,
-		      <&nand_otp>,
-		      <&uid_otp>,
-		      <&package_otp>,
-		      <&hw2_otp>,
-		      <&pkh_otp>,
-		      <&board_id>;
+// //#if 0
+// &nvmem_layout {
+// 	nvmem-cells = <&cfg0_otp>,
+// 		      <&part_number_otp>,
+// 		      <&monotonic_otp>,
+// 		      <&nand_otp>,
+// 		      <&uid_otp>,
+// 		      <&package_otp>,
+// 		      <&hw2_otp>,
+// 		      <&pkh_otp>,
+// 		      <&board_id>;
 
-	nvmem-cell-names = "cfg0_otp",
-			   "part_number_otp",
-			   "monotonic_otp",
-			   "nand_otp",
-			   "uid_otp",
-			   "package_otp",
-			   "hw2_otp",
-			   "pkh_otp",
-			   "board_id";
-};
+// 	nvmem-cell-names = "cfg0_otp",
+// 			   "part_number_otp",
+// 			   "monotonic_otp",
+// 			   "nand_otp",
+// 			   "uid_otp",
+// 			   "package_otp",
+// 			   "hw2_otp",
+// 			   "pkh_otp",
+// 			   "board_id";
+// };
+//#endif
 
 &pwr_regulators {
 	system_suspend_supported_soc_modes = <
