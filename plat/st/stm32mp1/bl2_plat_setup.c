@@ -338,7 +338,7 @@ void bl2_el3_plat_arch_setup(void)
 	* c.d = STMicro sub-version
 	* x   = Datum System version
 	*/
-	NOTICE("FSBL: v2.6.1.0-1\n");
+	NOTICE("FSBL: v2.6-datum.2\n");
 	
 	stm32mp_print_boardinfo();
 
