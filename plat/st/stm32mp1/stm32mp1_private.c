@@ -827,7 +827,8 @@ bool stm32mp1_is_wakeup_from_standby(void)
 	}
 #endif
 
-	return stm32_pm_context_is_valid();
+	// return stm32_pm_context_is_valid();
+	return false;
 }
 
 bool stm32mp_skip_boot_device_after_standby(void)
@@ -838,9 +839,9 @@ bool stm32mp_skip_boot_device_after_standby(void)
 		if (stm32mp1_is_wakeup_from_standby()) {
 			skip = 1;
 #if STM32MP15
-			if (stm32_pm_get_optee_ep() == 0U) {
-				skip = 0;
-			}
+			// if (stm32_pm_get_optee_ep() == 0U) {
+			// 	skip = 0;
+			// }
 #endif
 		} else {
 			skip = 0;

@@ -92,10 +92,10 @@ static int stm32mp1_ddr_setup(void)
 
 	config.self_refresh = false;
 
-	if (stm32mp1_is_wakeup_from_standby()) {
-		config.self_refresh = true;
-		config.zdata = stm32_get_zdata_from_context();
-	}
+	// if (stm32mp1_is_wakeup_from_standby()) {
+	// 	config.self_refresh = true;
+	// 	config.zdata = stm32_get_zdata_from_context();
+	// }
 
 	/* Disable axidcg clock gating during init */
 	mmio_clrbits_32(priv->rcc + RCC_DDRITFCR, RCC_DDRITFCR_AXIDCGEN);
@@ -123,7 +123,7 @@ static int stm32mp1_ddr_setup(void)
 		}
 
 		/* Restore area overwritten by training */
-		stm32_restore_ddr_training_area();
+		// stm32_restore_ddr_training_area();
 	} else {
 		uret = stm32mp_ddr_test_data_bus();
 		if (uret != 0U) {

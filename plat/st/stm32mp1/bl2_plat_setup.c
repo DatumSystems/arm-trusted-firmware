@@ -181,7 +181,7 @@ void bl2_platform_setup(void)
 #endif
 
 		/* Clear the context in BKPSRAM */
-		stm32_clean_context();
+		// stm32_clean_context();
 	}
 
 	/* Map DDR for binary load, now with cacheable attribute */
@@ -333,12 +333,11 @@ void bl2_el3_plat_arch_setup(void)
 	}
 
 	/* 
-	* Versioning for Datum: a.b.c.d-x
+	* Versioning for Datum: a.b-datum.x
 	* a.b = arm-trusted-firmware (upstream) version
-	* c.d = STMicro sub-version
 	* x   = Datum System version
 	*/
-	NOTICE("FSBL: v2.6-datum.2\n");
+	NOTICE("FSBL: v2.6-datum.3-bkpsram\n");
 	
 	stm32mp_print_boardinfo();
 
@@ -558,13 +557,13 @@ int bl2_plat_handle_post_image_load(unsigned int image_id)
 		break;
 
 	case BL32_IMAGE_ID:
-		if (wakeup_ddr_sr && stm32mp_skip_boot_device_after_standby()) {
-			bl_mem_params->ep_info.pc = stm32_pm_get_optee_ep();
-			if (stm32mp1_addr_inside_backupsram(bl_mem_params->ep_info.pc)) {
-				clk_enable(BKPSRAM);
-			}
-			break;
-		}
+		// if (wakeup_ddr_sr && stm32mp_skip_boot_device_after_standby()) {
+		// 	bl_mem_params->ep_info.pc = stm32_pm_get_optee_ep();
+		// 	if (stm32mp1_addr_inside_backupsram(bl_mem_params->ep_info.pc)) {
+		// 		clk_enable(BKPSRAM);
+		// 	}
+		// 	break;
+		// }
 
 		if (optee_header_is_valid(bl_mem_params->image_info.image_base)) {
 			image_info_t *paged_image_info = NULL;
@@ -606,9 +605,9 @@ int bl2_plat_handle_post_image_load(unsigned int image_id)
 			bl_mem_params->ep_info.args.arg0 = 0;
 		}
 
-		if (bl_mem_params->ep_info.pc >= STM32MP_DDR_BASE) {
-			stm32_context_save_bl2_param();
-		}
+		// if (bl_mem_params->ep_info.pc >= STM32MP_DDR_BASE) {
+		// 	stm32_context_save_bl2_param();
+		// }
 		break;
 
 	case BL33_IMAGE_ID:
