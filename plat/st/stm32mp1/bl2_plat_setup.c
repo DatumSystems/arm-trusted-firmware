@@ -337,7 +337,7 @@ void bl2_el3_plat_arch_setup(void)
 	* a.b = arm-trusted-firmware (upstream) version
 	* x   = Datum System version
 	*/
-	NOTICE("FSBL: v2.6-datum.3-bkpsram\n");
+	NOTICE("FSBL: v2.6-datum.3\n");
 	
 	stm32mp_print_boardinfo();
 
