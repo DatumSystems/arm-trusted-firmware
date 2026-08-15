@@ -7,7 +7,8 @@
 #ifndef STM32MP1_FIP_DEF_H
 #define STM32MP1_FIP_DEF_H
 
-#define STM32MP_DDR_S_SIZE		U(0x02000000)	/* 32 MB */
+#define STM32MP_DDR_S_SIZE		U(0x02000000 - 0x20000)	/* Datum: carve out 128KiB for BRMCC */
+//#define STM32MP_DDR_S_SIZE		U(0x02000000)	/* 32 MB */ 
 
 #if STM32MP_SSP
 #if STM32MP13
